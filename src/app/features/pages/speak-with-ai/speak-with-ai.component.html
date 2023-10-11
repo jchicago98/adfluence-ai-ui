@@ -1,0 +1,16 @@
+<div class="d-flex h-100 text-center text-bg-dark">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <app-navbar></app-navbar>
+  
+      <main class="px-3 landing-content">
+        <div style="text-align:center;margin-top: 200px;" >
+            <button (click)="initiateRecording()" class="btn btn-primary" *ngIf="!recording" style="cursor: pointer;background-color: green;color: white;font-size: 40px;"> Start Recording </button>
+            <button (click)="stopRecording()" class="btn btn-danger" *ngIf="recording" style="cursor: pointer;background-color: red;color: white;font-size: 40px;"> Stop Recording </button>
+            <audio controls="" *ngIf="url">
+            <source [src]="sanitize(url)" type="audio/wav">
+            </audio>
+            </div>
+      </main>
+    </div>
+  </div>
+  

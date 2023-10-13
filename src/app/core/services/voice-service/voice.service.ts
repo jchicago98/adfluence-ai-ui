@@ -14,6 +14,7 @@ export class VoiceService {
   public text = '';
   tempWords: any;
 
+  private socket!: WebSocket;
   records$ = new BehaviorSubject(undefined);
   recording = null;
   mediaRecorder: any;
@@ -38,9 +39,6 @@ export class VoiceService {
 
   start() {
     this.socket = new WebSocket('ws://localhost:443/');
-    this.socket.onopen = (event) => {
-      console.log('WebSocket connection opened:', event);
-    };
     this.isStoppedSpeechRecog = false;
     this.recognition.start();
     this.recognition.addEventListener('end', (condition: any) => {
@@ -54,7 +52,6 @@ export class VoiceService {
         if(this.text != ' .'){
           this.text = this.text.substring(1);
           this.socket.send(this.text);
-          console.log(this.text);
         }
 
         this.text = '';
@@ -85,9 +82,6 @@ export class VoiceService {
   getUserText(){
     return this.text;
   }
-
-  private socket!: WebSocket;
-  message: string = '';
 
   onRecord() {
     

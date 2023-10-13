@@ -1,19 +1,18 @@
 <div class="d-flex h-100 text-center text-bg-dark">
   <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <app-navbar></app-navbar>
-
     <main class="px-3 landing-content">
       <div style="margin: 100px">
         <h1>Speak with AI</h1>
         <button style="margin: 10px" (click)="startService()">Start</button>
         <button style="margin: 10px" (click)="stopService()">Stop</button>
-        <p>{{ service.text }}</p>
+        <div *ngFor="let messages of listOfMessages">
+          <div class="user-message" *ngIf="messages.user">
+            {{ messages.user }}
+          </div>
+          <div class="other-message" *ngIf="messages.ai">{{ messages.ai }}</div>
+        </div>
       </div>
-      <ul *ngIf="records$ | async as records">
-        <li *ngFor="let record of records$">
-          <div>{{ record.label }}</div>
-        </li>
-      </ul>
     </main>
   </div>
 </div>

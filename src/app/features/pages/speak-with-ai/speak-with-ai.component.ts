@@ -8,22 +8,24 @@ import { VoiceService } from 'src/app/core/services/voice-service/voice.service'
   styleUrls: ['./speak-with-ai.component.css'],
 })
 export class SpeakWithAiComponent {
-  records$: any;
-  audioRecording: any;
-  userText!: string;
-
-  message: string = '';
+  listOfMessages: any[] = [];
+  private socket!: WebSocket;
 
   constructor(public service: VoiceService) {
     this.service.init();
   }
 
   ngOnInit() {
-    this.records$ = this.service.getRecords();
+    this.socket = new WebSocket('ws://localhost:443/');
   }
 
   ngDoCheck() {
-
+    this.socket.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+      console.log(message);
+      this.listOfMessages.push(message);
+      console.log(this.listOfMessages);
+    };
   }
 
   startService() {
@@ -33,5 +35,4 @@ export class SpeakWithAiComponent {
   stopService() {
     this.service.stop();
   }
-
 }

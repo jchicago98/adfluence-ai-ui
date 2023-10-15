@@ -16,6 +16,7 @@ export class SpeakWithAiComponent {
   listOfMessages: any[] = [];
   private socket!: WebSocket;
   voiceId = '21m00Tcm4TlvDq8ikWAM'; // Rachel Voice
+  private speechSynthesis: SpeechSynthesis;
 
   elevenLabsHeaders = {
     headers: new HttpHeaders({
@@ -57,6 +58,7 @@ export class SpeakWithAiComponent {
 
   constructor(public service: VoiceService, private http: HttpClient) {
     this.service.init();
+    this.speechSynthesis = window.speechSynthesis;
   }
 
   ngOnInit() {
@@ -69,23 +71,33 @@ export class SpeakWithAiComponent {
       console.log(message);
       this.listOfMessages.push(message);
       if (message.ai) {
-        this.textToSpeech(message.ai).subscribe((data) => {
-          const audioContext = new window.AudioContext();
-          audioContext.decodeAudioData(
-            data,
-            (buffer) => {
-              const source = audioContext.createBufferSource();
-              source.buffer = buffer;
-              source.connect(audioContext.destination);
-              source.start(0);
-            },
-            (error) => {
-              console.error('Error decoding audio data', error);
-            }
-          );
-        });
+        this.stopService();
+        this.speak(message.ai);
       }
     };
+  }
+
+  elevenLabsTextToSpeech(message: string) {
+    this.textToSpeech(message).subscribe((data) => {
+      const audioContext = new window.AudioContext();
+      audioContext.decodeAudioData(
+        data,
+        (buffer) => {
+          const source = audioContext.createBufferSource();
+          source.buffer = buffer;
+          source.connect(audioContext.destination);
+          source.start(0);
+        },
+        (error) => {
+          console.error('Error decoding audio data', error);
+        }
+      );
+    });
+  }
+
+  speak(text: string) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    this.speechSynthesis.speak(utterance);
   }
 
   startService() {

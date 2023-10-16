@@ -15,13 +15,12 @@
   --bs-btn-active-border-color: #5a23c8;
 }
 
-.cover-container {
-  max-width: 42em;
-}
-
 .landing-content{
   display: flex;
-  margin: auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20%;
+  margin-bottom: auto;
 }
 
 

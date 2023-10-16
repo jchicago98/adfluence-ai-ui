@@ -73,6 +73,8 @@ export class SpeakWithAiComponent {
       if (message.ai) {
         this.stopService();
         this.speak(message.ai);
+        //this.elevenLabsTextToSpeech(message.ai);
+        this.startService();
       }
     };
   }

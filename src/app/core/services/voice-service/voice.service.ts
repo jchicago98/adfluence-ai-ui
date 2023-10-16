@@ -7,7 +7,6 @@ declare var MediaRecorder: any;
 @Injectable({
   providedIn: 'root',
 })
-
 export class VoiceService {
   recognition = new webkitSpeechRecognition();
   isStoppedSpeechRecog = false;
@@ -42,16 +41,19 @@ export class VoiceService {
     this.isStoppedSpeechRecog = false;
     this.recognition.start();
     this.recognition.addEventListener('end', (condition: any) => {
-      
       if (this.isStoppedSpeechRecog) {
         this.recognition.stop();
       } else {
         this.wordConcat();
         this.recognition.start();
         this.onRecord();
-        if(this.text != ' .'){
+        if (this.text != ' .') {
           this.text = this.text.substring(1);
-          this.socket.send(this.text);
+          this.text = this.text.replaceAll('.', '');
+          this.text = this.text.replace(/^\s+/, '');
+          if (this.text.length > 0) {
+            this.socket.send(this.text);
+          }
         }
 
         this.text = '';
@@ -79,12 +81,11 @@ export class VoiceService {
     return this.records$.asObservable();
   }
 
-  getUserText(){
+  getUserText() {
     return this.text;
   }
 
   onRecord() {
-    
     navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
       this.stream = stream;
       this.mediaRecorder = new MediaRecorder(stream);

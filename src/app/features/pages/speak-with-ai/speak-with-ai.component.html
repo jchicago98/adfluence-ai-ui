@@ -1,11 +1,16 @@
-<div class="d-flex h-100 text-center text-bg-dark">
-  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-    <app-navbar></app-navbar>
-    <main class="px-3 landing-content">
-      <div style="margin: 100px">
-        <h1>Speak with AI</h1>
-        <button style="margin: 10px" (click)="startService()">Start</button>
-        <button style="margin: 10px" (click)="stopService()">Stop</button>
+<main class="px-3 landing-content">
+  <div class="container-manual">
+    <div class="sidebar">
+      <h2>History</h2>
+      <ul id="chatList">
+        <li data-chat="Chat 1">Chat 1</li>
+        <li data-chat="Chat 2">Chat 2</li>
+        <li data-chat="Chat 3">Chat 3</li>
+      </ul>
+    </div>
+    <div class="chat">
+      <div class="chat-header">`Use Start button below to speak with the AI`</div>
+      <div class="chat-messages" id="chatMessages">
         <div *ngFor="let messages of listOfMessages">
           <div class="user-message" *ngIf="messages.user">
             {{ messages.user }}
@@ -13,6 +18,10 @@
           <div class="other-message" *ngIf="messages.ai">{{ messages.ai }}</div>
         </div>
       </div>
-    </main>
+      <div class="record-buttons-container">
+        <button style="margin: 10px" type="button" class="btn btn-outline-primary start-button" (click)="startService()">Start</button>
+        <button style="margin: 10px" type="button" class="btn btn-outline-danger" (click)="stopService()">Stop</button>
+      </div>
+    </div>
   </div>
-</div>
+</main>

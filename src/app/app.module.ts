@@ -8,13 +8,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SpeakWithAiComponent } from './features/pages/speak-with-ai/speak-with-ai.component';
+import { FooterComponent } from './shared/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingPageComponent,
     NavbarComponent,
-    SpeakWithAiComponent
+    SpeakWithAiComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

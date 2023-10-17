@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 declare var webkitSpeechRecognition: any;
 declare var MediaRecorder: any;
@@ -12,6 +13,7 @@ export class VoiceService {
   isStoppedSpeechRecog = false;
   public text = '';
   tempWords: any;
+  websocketURL : string = environment.chatgptWebSocketURL;
 
   private socket!: WebSocket;
   records$ = new BehaviorSubject(undefined);
@@ -37,7 +39,7 @@ export class VoiceService {
   }
 
   start() {
-    this.socket = new WebSocket('ws://localhost:443/');
+    this.socket = new WebSocket(this.websocketURL);
     this.isStoppedSpeechRecog = false;
     this.recognition.start();
     this.recognition.addEventListener('end', (condition: any) => {

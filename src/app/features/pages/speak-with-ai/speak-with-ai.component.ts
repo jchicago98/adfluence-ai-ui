@@ -6,6 +6,7 @@ import {
 } from '@angular/common/http';
 import { VoiceService } from 'src/app/core/services/voice-service/voice.service';
 import { Observable, catchError, map, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-speak-with-ai',
@@ -17,6 +18,7 @@ export class SpeakWithAiComponent {
   private socket!: WebSocket;
   voiceId = '21m00Tcm4TlvDq8ikWAM'; // Rachel Voice
   private speechSynthesis: SpeechSynthesis;
+  websocketURL : string = environment.chatgptWebSocketURL;
 
   elevenLabsHeaders = {
     headers: new HttpHeaders({
@@ -62,7 +64,7 @@ export class SpeakWithAiComponent {
   }
 
   ngOnInit() {
-    this.socket = new WebSocket('ws://localhost:443/');
+    this.socket = new WebSocket(this.websocketURL);
   }
 
   ngDoCheck() {

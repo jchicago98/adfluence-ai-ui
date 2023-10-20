@@ -18,7 +18,10 @@ export class SpeakWithAiComponent {
   private socket!: WebSocket;
   voiceId = '21m00Tcm4TlvDq8ikWAM'; // Rachel Voice
   private speechSynthesis: SpeechSynthesis;
-  websocketURL : string = environment.chatgptWebSocketURL;
+  websocketURL: string = environment.chatgptWebSocketURL;
+  uuidv4Pattern =
+    /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;
+  clientId!: string;
 
   elevenLabsHeaders = {
     headers: new HttpHeaders({
@@ -69,14 +72,20 @@ export class SpeakWithAiComponent {
 
   ngDoCheck() {
     this.socket.onmessage = (event) => {
-      const message = JSON.parse(event.data);
-      console.log(message);
-      this.listOfMessages.push(message);
-      if (message.ai) {
-        this.stopService();
-        this.speak(message.ai);
-        //this.elevenLabsTextToSpeech(message.ai);
-        this.startService();
+      // console.log(event);
+      if (!this.uuidv4Pattern.test(event.data)) {
+        const message = JSON.parse(event.data);
+        console.log(message);
+        this.listOfMessages.push(message);
+        if (message.ai) {
+          this.stopService();
+          this.speak(message.ai);
+          //this.elevenLabsTextToSpeech(message.ai);
+          this.startService();
+        }
+      } else {
+        this.clientId = event.data;
+        this.service.updateClientId(this.clientId);
       }
     };
   }

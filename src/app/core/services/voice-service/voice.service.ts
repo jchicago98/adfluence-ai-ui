@@ -6,12 +6,13 @@ declare var webkitSpeechRecognition: any;
 declare var MediaRecorder: any;
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class VoiceService {
   recognition = new webkitSpeechRecognition();
   isStoppedSpeechRecog = false;
   public text = '';
+  clientId !: string;
   tempWords: any;
   websocketURL : string = environment.chatgptWebSocketURL;
 
@@ -54,7 +55,8 @@ export class VoiceService {
           this.text = this.text.replaceAll('.', '');
           this.text = this.text.replace(/^\s+/, '');
           if (this.text.length > 0) {
-            this.socket.send(this.text);
+            const textObj = {userMessage: this.text, clientId: this.clientId};
+            this.socket.send(JSON.stringify(textObj));
           }
         }
 
@@ -85,6 +87,10 @@ export class VoiceService {
 
   getUserText() {
     return this.text;
+  }
+
+  updateClientId(userClientId: string){
+    this.clientId = userClientId;
   }
 
   onRecord() {

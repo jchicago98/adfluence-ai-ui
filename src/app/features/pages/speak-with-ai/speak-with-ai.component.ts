@@ -78,10 +78,8 @@ export class SpeakWithAiComponent {
         console.log(message);
         this.listOfMessages.push(message);
         if (message.ai) {
-          this.stopService();
           this.speak(message.ai);
           //this.elevenLabsTextToSpeech(message.ai);
-          this.startService();
         }
       } else {
         this.clientId = event.data;
@@ -109,9 +107,16 @@ export class SpeakWithAiComponent {
   }
 
   speak(text: string) {
+    this.service.isSystemSpeaking = true; 
     const utterance = new SpeechSynthesisUtterance(text);
+    utterance.onend = () => {
+      this.service.isSystemSpeaking = false;
+      this.startService();
+    };
     this.speechSynthesis.speak(utterance);
+    
   }
+  
 
   startService() {
     this.service.start();

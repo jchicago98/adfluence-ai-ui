@@ -13,6 +13,7 @@ export class VoiceService {
   isStoppedSpeechRecog = false;
   public text = '';
   clientId !: string;
+  public isSystemSpeaking !: boolean;
   tempWords: any;
   websocketURL : string = environment.chatgptWebSocketURL;
 
@@ -42,28 +43,36 @@ export class VoiceService {
   start() {
     this.socket = new WebSocket(this.websocketURL);
     this.isStoppedSpeechRecog = false;
-    this.recognition.start();
+  
+    // Check if the system is speaking, and if so, pause the recognition.
+    if (this.isSystemSpeaking) {
+      this.recognition.pause(); // Pause the recognition.
+    } else {
+      this.recognition.start(); // Start or resume the recognition.
+    }
+  
     this.recognition.addEventListener('end', (condition: any) => {
-      if (this.isStoppedSpeechRecog) {
-        this.recognition.stop();
+      if (this.isStoppedSpeechRecog || this.isSystemSpeaking) {
+        // Don't stop the recognition here; it's paused, and we'll resume it later.
       } else {
         this.wordConcat();
-        this.recognition.start();
         this.onRecord();
         if (this.text != ' .') {
           this.text = this.text.substring(1);
           this.text = this.text.replaceAll('.', '');
           this.text = this.text.replace(/^\s+/, '');
           if (this.text.length > 0) {
-            const textObj = {userMessage: this.text, clientId: this.clientId};
+            const textObj = { userMessage: this.text, clientId: this.clientId };
             this.socket.send(JSON.stringify(textObj));
           }
         }
-
         this.text = '';
       }
     });
   }
+  
+  
+
   stop() {
     this.isStoppedSpeechRecog = true;
     this.wordConcat();

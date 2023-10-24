@@ -20,7 +20,18 @@
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 20%;
-  margin-bottom: auto;
+  margin-bottom: 20%;
+}
+
+.background-box{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(52, 53, 65);
+  border-radius: 15px 15px 15px 15px;
+  height: 30%;
+  width: 50%;
 }
 
 
@@ -30,4 +41,20 @@
 .btn-light:focus {
   color: #333;
   text-shadow: none; /* Prevent inheritance from `body` */
+}
+
+.start-button{
+  animation: textColor 10s ease infinite;
+}
+
+@keyframes textColor {
+  0% {
+    color: #7e0fff;
+  }
+  50% {
+    color: #0fffc1;
+  }
+  100% {
+    color: #7e0fff;
+  }
 }

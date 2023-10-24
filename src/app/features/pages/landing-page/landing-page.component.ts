@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
@@ -12,31 +13,12 @@ export class LandingPageComponent {
   highlightY: number = 0;
   highlightColor: string = 'transparent'; // Initialize with a transparent background
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
 
-  onMouseMove(event: MouseEvent) {
-    // Update the mouse coordinates
-    this.mouseX = event.clientX;
-    this.mouseY = event.clientY;
-
-    // Update the position of the highlight element
-    this.highlightX = this.mouseX;
-    this.highlightY = this.mouseY;
-
-    // Update the background color of the highlight element based on mouse coordinates
-    this.updateHighlightColor();
+  routeToSpeakWithAIPage(){
+    this.router.navigate(['/speak']);
   }
 
-  updateHighlightColor() {
-    // Calculate the background color based on mouse coordinates
-    // You can adjust this logic to fit your specific needs
-    const red = this.mouseX % 256;
-    const green = this.mouseY % 256;
-    const blue = (this.mouseX + this.mouseY) % 256;
-
-    // Construct the background color string
-    this.highlightColor = `rgba(${red},${green},${blue}, 0.5)`;
-  }
 }

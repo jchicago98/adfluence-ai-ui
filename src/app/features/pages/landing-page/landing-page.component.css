@@ -1,46 +1,62 @@
-.btn-bd-primary {
-  --bd-violet-bg: #712cf9;
-  --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-
-  --bs-btn-font-weight: 600;
-  --bs-btn-color: var(--bs-white);
-  --bs-btn-bg: var(--bd-violet-bg);
-  --bs-btn-border-color: var(--bd-violet-bg);
-  --bs-btn-hover-color: var(--bs-white);
-  --bs-btn-hover-bg: #6528e0;
-  --bs-btn-hover-border-color: #6528e0;
-  --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-  --bs-btn-active-color: var(--bs-btn-hover-color);
-  --bs-btn-active-bg: #5a23c8;
-  --bs-btn-active-border-color: #5a23c8;
-}
-
-.landing-content{
+.main-element{
+  width: 145.5vh;
+  height: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 20%;
-  margin-bottom: 20%;
 }
 
 .background-box{
-  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: rgba(52, 53, 65);
   border-radius: 15px 15px 15px 15px;
-  height: 30%;
-  width: 50%;
+  height: 100%;
+  width: 100%;
 }
 
+@media (max-width: 1400px){
+  .main-element{
+      width: 129.5vh;
+  }
+}
 
-/* Custom default button */
+@media (max-width: 1300px){
+  .main-element{
+      width: 126.5vh;
+  }
+}
+
+@media (max-width: 1200px){
+  .main-element{
+      width: 123vh;
+  }
+}
+
+@media (max-width: 1100px){
+  .main-element{
+      width: 114.5vh;
+  }
+}
+
+@media (max-width: 1000px){
+  .main-element{
+      width: 100vh;
+  }
+}
+
+@media (max-width: 900px){
+  .main-element{
+      width: 100%;
+  }
+}
+
 .btn-light,
 .btn-light:hover,
 .btn-light:focus {
   color: #333;
-  text-shadow: none; /* Prevent inheritance from `body` */
+  text-shadow: none;
 }
 
 .start-button{

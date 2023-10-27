@@ -17,21 +17,25 @@
 
           <div class="b-example-divider b-example-vr"></div>
 
-          <div class="scroll-chat-messages">
+          <div *ngIf="!viewInitialAsset" class="scroll-chat-messages">
             <div class="live-messages">
-          <div *ngFor="let messages of listOfMessages">
-            <div class="user-message" *ngIf="messages.user">
-            {{ messages.user }}
+              <div *ngFor="let messages of listOfMessages">
+                <div class="user-message" *ngIf="messages.user">
+                  {{ messages.user }}
+                </div>
+                <div class="other-message" *ngIf="messages.ai">
+                  adfluence AI: {{ messages.ai }}
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="other-message" *ngIf="messages.ai">adfluence AI: {{ messages.ai }}</div>
+
+          <div *ngIf="viewInitialAsset" class="initial-template-chat">
+            <h1 id="adfluence-ai-h1-text">adfluence AI</h1>
           </div>
-          
+
+
         </div>
-          </div>
-        
-        </div>
-        
-        
       </div>
     </div>
     <div class="button-group">

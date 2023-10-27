@@ -1,11 +1,60 @@
-<main class="px-3 landing-content d-flex align-items-center">
+<main class="d-flex ps-3 align-items-center text-center main-element">
   <div class="background-box">
-    <div class="main-info">
-      <h1>Need advice?</h1>
-      <p class="lead">
-        Speak with our adfluence AI to seek advice on a whole variety of topics
-      </p>
-      <button style="margin: 10px" type="button" class="btn btn-outline-primary start-button" (click)="routeToSpeakWithAIPage()">Speak with our AI</button>
+    <div class="chat-box">
+      <div class="initial-title">
+        <h1>Need advice?</h1>
+        <p class="lead">
+          Speak with our adfluence AI to seek advice on a whole variety of
+          topics
+        </p>
+      </div>
+      <div class="chat-messages">
+        <div class="chat-message-grid">
+          <div class="chat-history">
+            <div class="mt-3">Chat History</div>
+            <hr />
+          </div>
+
+          <div class="b-example-divider b-example-vr"></div>
+
+          <div *ngIf="!viewInitialAsset" class="scroll-chat-messages">
+            <div class="live-messages">
+              <div *ngFor="let messages of listOfMessages">
+                <div class="user-message" *ngIf="messages.user">
+                  {{ messages.user }}
+                </div>
+                <div class="other-message" *ngIf="messages.ai">
+                  adfluence AI: {{ messages.ai }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="viewInitialAsset" class="initial-template-chat">
+            <h1 id="adfluence-ai-h1-text">adfluence AI</h1>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+    <div class="button-group">
+      <button
+        style="margin: 10px"
+        type="button"
+        class="btn btn-outline-primary start-button"
+        (click)="startService()"
+      >
+        Start
+      </button>
+      <button
+        style="margin: 10px"
+        type="button"
+        class="btn btn-outline-danger"
+        (click)="stopService()"
+      >
+        Stop
+      </button>
     </div>
   </div>
 </main>

@@ -31,15 +31,12 @@
 
 </svg>
 <div class="d-flex">
-<div
-  class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark"
-  style="width: 280px"
->
+<div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark sidebar">
   <a
     href="/"
     class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
   >
-    <span id="adfluence-ai-logo" class="fs-4">adfluence AI</span>
+    <span id="adfluence-ai-logo">adfluence AI</span>
   </a>
   <hr />
   <ul class="nav nav-pills flex-column mb-auto">
@@ -48,7 +45,7 @@
         <svg class="bi pe-none me-2" width="16" height="16">
           <use xlink:href="#home" />
         </svg>
-        Home
+        <div class="adfluence-link">Home</div>
       </a>
     </li>
     <li class="nav-item">
@@ -56,7 +53,7 @@
         <svg class="bi pe-none me-2" width="16" height="16">
           <use xlink:href="#people-circle" />
         </svg>
-        Profile
+        <div class="adfluence-link">Profile</div>
       </a>
     </li>
     <li class="nav-item">
@@ -64,7 +61,7 @@
         <svg class="bi pe-none me-2" width="16" height="16">
           <use xlink:href="#document-paper" />
         </svg>
-        Terms of Service
+        <div class="adfluence-link">Terms of Service</div>
       </a>
     </li>
     <li class="nav-item">
@@ -72,7 +69,7 @@
         <svg class="bi pe-none me-2" width="16" height="16">
           <use xlink:href="#lock" />
         </svg>
-        Privacy Policy
+        <div class="adfluence-link">Privacy Policy</div>
       </a>
     </li>
     <li class="nav-item">
@@ -80,17 +77,17 @@
         <svg class="bi pe-none me-2" width="16" height="16">
           <use xlink:href="#grid" />
         </svg>
-        About Us
+        <div class="adfluence-link">About Us</div>
       </a>
     </li>
   </ul>
 
   <hr />
   <div class="auth-group">
-    <button type="button" class="btn btn-outline-secondary me-3">
+    <button type="button" class="btn btn-outline-secondary me-3 auth-btn">
       Sign Up
     </button>
-    <button type="button" class="btn btn-outline-secondary">Login</button>
+    <button type="button" class="btn btn-outline-secondary auth-btn">Login</button>
   </div>
   <app-footer></app-footer>
   

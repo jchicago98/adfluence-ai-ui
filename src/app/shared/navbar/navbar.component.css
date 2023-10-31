@@ -4,6 +4,8 @@
 
 #adfluence-ai-logo {
   animation: textColor 10s ease infinite;
+  font-size: calc(1.275rem + .3vw);
+  transition: font-size 0.3s;
 }
 
 #adfluence-ai-logo:hover{
@@ -52,5 +54,37 @@
 .b-example-vr {
   flex-shrink: 0;
   height: 95vh;
+}
+
+/* Add a class to the sidebar div for easier styling */
+.sidebar {
+  width: 280px;
+  transition: width 0.3s; /* Add transition for smooth resizing */
+}
+
+/* Define styles for screens wider than 768px */
+@media (min-width: 768px) {
+  .sidebar {
+    width: 280px; /* Keep the width the same for wider screens */
+  }
+}
+
+/* Define styles for screens narrower than 768px */
+@media (max-width: 767px) {
+  .sidebar {
+    width: 80px; /* Adjust the width for narrower screens */
+  }
+  .adfluence-link{
+    display: none;
+  }
+  #adfluence-ai-logo{
+    font-size: small;
+  }
+  .auth-btn{
+    width: 98%;
+    font-size: small;
+    margin-top: 20px;
+    padding: 4px;
+  }
 }
 

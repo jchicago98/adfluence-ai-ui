@@ -62,7 +62,8 @@ export class VoiceService {
           this.text = this.text.replaceAll('.', '');
           this.text = this.text.replace(/^\s+/, '');
           if (this.text.length > 0) {
-            const textObj = { userMessage: this.text, clientId: this.clientId };
+            let clientId = sessionStorage.getItem('clientId');
+            const textObj = { userMessage: this.text, clientId: clientId };
             this.socket.send(JSON.stringify(textObj));
           }
         }

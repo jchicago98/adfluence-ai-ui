@@ -30,6 +30,7 @@ export class LandingPageComponent {
 
   ngDoCheck() {
     this.socket.onmessage = (event) => {
+      console.log(event.data);
       if (!this.uuidv4Pattern.test(event.data)) {
         const message = JSON.parse(event.data);
         console.log(message);

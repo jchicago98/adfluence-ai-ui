@@ -28,6 +28,7 @@ export class VoiceService {
   constructor() {}
 
   init() {
+    this.socket = new WebSocket(this.websocketURL);
     this.recognition.interimResults = true;
     this.recognition.lang = 'en-US';
 
@@ -41,7 +42,6 @@ export class VoiceService {
   }
 
   start() {
-    this.socket = new WebSocket(this.websocketURL);
     this.isStoppedSpeechRecog = false;
   
     // Check if the system is speaking, and if so, pause the recognition.

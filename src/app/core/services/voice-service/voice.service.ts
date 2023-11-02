@@ -28,6 +28,7 @@ export class VoiceService {
   constructor() {}
 
   init() {
+    this.socket = new WebSocket(this.websocketURL);
     this.recognition.interimResults = true;
     this.recognition.lang = 'en-US';
 
@@ -41,7 +42,6 @@ export class VoiceService {
   }
 
   start() {
-    this.socket = new WebSocket(this.websocketURL);
     this.isStoppedSpeechRecog = false;
   
     // Check if the system is speaking, and if so, pause the recognition.
@@ -62,7 +62,8 @@ export class VoiceService {
           this.text = this.text.replaceAll('.', '');
           this.text = this.text.replace(/^\s+/, '');
           if (this.text.length > 0) {
-            const textObj = { userMessage: this.text, clientId: this.clientId };
+            let clientId = sessionStorage.getItem('clientId');
+            const textObj = { userMessage: this.text, clientId: clientId };
             this.socket.send(JSON.stringify(textObj));
           }
         }

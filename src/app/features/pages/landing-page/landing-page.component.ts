@@ -25,10 +25,12 @@ export class LandingPageComponent {
 
   ngOnInit() {
     this.socket = new WebSocket(this.websocketURL);
+    this.clientId = sessionStorage.getItem('clientId') ?? '';
   }
 
   ngDoCheck() {
     this.socket.onmessage = (event) => {
+      console.log(event.data);
       if (!this.uuidv4Pattern.test(event.data)) {
         const message = JSON.parse(event.data);
         console.log(message);
@@ -38,6 +40,7 @@ export class LandingPageComponent {
         }
       } else {
         this.clientId = event.data;
+        sessionStorage.setItem('clientId', this.clientId);
         this.service.updateClientId(this.clientId);
       }
     };

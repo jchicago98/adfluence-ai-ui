@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  SocialAuthService,
-  SocialUser,
-  GoogleLoginProvider,
-} from '@abacritt/angularx-social-login';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
@@ -34,11 +30,4 @@ export class LoginComponent {
     }
   }
 
-  signOut() {
-    this.cookieService.delete('adfluenceUserInfo');
-    this.user = new SocialUser();
-    this.loggedIn = false;
-    console.log('Logged in status: ', this.loggedIn);
-    window.location.reload();
-  }
 }

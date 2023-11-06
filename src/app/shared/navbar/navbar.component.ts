@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +8,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  constructor(private router: Router) {}
 
-  routeToHomepage() {
-    this.router.navigate(['']);
+  loggedIn: boolean = false;
+
+  constructor(private socialAuthService: SocialAuthService, private cookieService: CookieService) {}
+
+  ngOnInit() {
+    this.loggedIn = this.cookieService.check('adfluenceUserInfo');
   }
+
+  signOut() {
+    this.cookieService.delete('adfluenceUserInfo');
+    this.loggedIn = false;
+    console.log('Logged in status: ', this.loggedIn);
+    window.location.reload();
+  }
+
 }

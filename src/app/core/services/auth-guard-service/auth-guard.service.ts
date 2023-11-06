@@ -18,7 +18,7 @@ export class AuthGuardService {
   loggedIn: boolean = false;
   private accessToken = '';
 
-  constructor(private socialAuthService: SocialAuthService, private cookieService: CookieService) {}
+  constructor(private socialAuthService: SocialAuthService, private cookieService: CookieService, private router:Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -30,6 +30,14 @@ export class AuthGuardService {
       this.loggedIn = user != null;
       this.cookieService.set('adfluenceUserInfo', JSON.stringify(this.user));
     });
+    const urlPath = state.url;
+    if(this.cookieService.check('adfluenceUserInfo') && urlPath.includes('login')){
+      this.router.navigate(['/']);
+      return false;
+    }
+    else if(!this.cookieService.check('adfluenceUserInfo') && urlPath.includes('login')){
+      return true;
+    }
     
     return this.cookieService.check('adfluenceUserInfo');
   }

@@ -1,0 +1,19 @@
+<div class="login-container">
+  <div *ngIf="!loggedIn">
+    <asl-google-signin-button
+      type="standard"
+      shape="pill"
+      text="signin_with"
+      logo_alignment="left"
+      width="200"
+      theme="filled_black"
+    ></asl-google-signin-button>
+  </div>
+</div>
+
+<div *ngIf="loggedIn">
+  <p>Welcome, {{ user.name }}</p>
+  <p>Email: {{ user.email }}</p>
+  <img [src]="user.photoUrl" alt="User Profile Picture" />
+  <button (click)="signOut()">Log Out</button>
+</div>

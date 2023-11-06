@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LandingPageComponent } from './features/pages/landing-page/landing-page.component';
-import { SpeakWithAiComponent } from './features/pages/speak-with-ai/speak-with-ai.component';
+import { LoginComponent } from './features/pages/login/login.component';
 
 const routes: Routes = [
   {
@@ -9,8 +9,8 @@ const routes: Routes = [
     component: LandingPageComponent
   },
   {
-    path: 'speak',
-    component: SpeakWithAiComponent
+    path: 'login',
+    component: LoginComponent
   }
 ];
 

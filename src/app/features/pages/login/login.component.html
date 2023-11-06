@@ -1,13 +1,19 @@
-<div class="login-container">
-  <div *ngIf="!loggedIn">
-    <asl-google-signin-button
-      type="standard"
-      shape="pill"
-      text="signin_with"
-      logo_alignment="left"
-      width="200"
-      theme="filled_black"
-    ></asl-google-signin-button>
+<div *ngIf="!loggedIn">
+  <div class="login-container">
+    <div class="login-title">
+      <h1>Login</h1>
+    </div>
+    <div class="horizontal-line"></div>
+    <div class="google-btn">
+      <asl-google-signin-button
+        type="standard"
+        shape="pill"
+        text="signin_with"
+        logo_alignment="left"
+        width="200"
+        theme="filled_black"
+      ></asl-google-signin-button>
+    </div>
   </div>
 </div>
 

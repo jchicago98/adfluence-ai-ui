@@ -2,6 +2,11 @@
   background-color: #0d6efd;
 }
 
+.nav-link{
+  display: flex !important;
+  align-items: center !important;
+}
+
 #adfluence-ai-logo {
   animation: textColor 10s ease infinite;
   font-size: calc(1.275rem + .3vw);

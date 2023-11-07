@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { SocialUser } from '@abacritt/angularx-social-login';
 
 declare var webkitSpeechRecognition: any;
 declare var MediaRecorder: any;
@@ -25,7 +27,7 @@ export class VoiceService {
   audio: any;
   stream: any;
 
-  constructor() {}
+  constructor(private cookieService: CookieService) {}
 
   init() {
     this.socket = new WebSocket(this.websocketURL);
@@ -63,8 +65,16 @@ export class VoiceService {
           this.text = this.text.replace(/^\s+/, '');
           if (this.text.length > 0) {
             let clientId = sessionStorage.getItem('clientId');
-            const textObj = { userMessage: this.text, clientId: clientId };
-            this.socket.send(JSON.stringify(textObj));
+            let loggedIn : boolean = this.cookieService.check('adfluenceUserInfo');
+            if(loggedIn){
+              let cookieUserInfo: SocialUser = JSON.parse(this.cookieService.get('adfluenceUserInfo'));
+              const textObj = { userMessage: this.text, clientId: clientId, firstName: cookieUserInfo.firstName, lastName: cookieUserInfo.lastName, emailAddress: cookieUserInfo.email };
+              this.socket.send(JSON.stringify(textObj));
+            }
+            else{
+              const textObj = { userMessage: this.text, clientId: clientId };
+              this.socket.send(JSON.stringify(textObj));
+            }
           }
         }
         this.text = '';

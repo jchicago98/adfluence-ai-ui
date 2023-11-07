@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OpenaiVoiceService {
   private audio: HTMLAudioElement;
+  websocketURL : string = environment.chatgptWebSocketURL;
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.audio = new Audio();
   }
 
@@ -20,7 +23,7 @@ export class OpenaiVoiceService {
   }
 
   private async fetchTextToSpeech(text: string): Promise<ArrayBuffer> {
-    const apiKey = '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';
+    const apiKey = environment.API_KEY_OPEN_AI;
     const url = 'https://api.openai.com/v1/audio/speech';
     const requestData = {
       model: 'tts-1',

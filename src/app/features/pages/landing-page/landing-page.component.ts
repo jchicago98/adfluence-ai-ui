@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { VoiceService } from 'src/app/core/services/voice-service/voice.service';
 import { environment } from 'src/environments/environment';
+import { OpenaiVoiceService } from 'src/app/core/services/openai-voice-service/openai-voice.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -18,7 +19,7 @@ export class LandingPageComponent {
   clientId!: string;
   viewInitialAsset : boolean = true;
 
-  constructor(public service: VoiceService, private http: HttpClient) {
+  constructor(public service: VoiceService, private http: HttpClient, private textToSpeechService: OpenaiVoiceService) {
     this.service.init();
     this.speechSynthesis = window.speechSynthesis;
   }
@@ -36,7 +37,7 @@ export class LandingPageComponent {
         console.log(message);
         this.listOfMessages.push(message);
         if (message.ai) {
-          this.speak(message.ai);
+          this.playAudio(message.ai);
         }
       } else {
         this.clientId = event.data;
@@ -54,6 +55,14 @@ export class LandingPageComponent {
       this.startService();
     };
     this.speechSynthesis.speak(utterance);
+  }
+
+  async playAudio(text: string) {
+    this.service.isSystemSpeaking = true;
+    await this.textToSpeechService.convertAndPlay(text).then(()=>{
+      this.service.isSystemSpeaking = false;
+      this.startService();
+    });
   }
 
   startService() {

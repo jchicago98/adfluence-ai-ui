@@ -45,6 +45,7 @@ export class LandingPageComponent {
         this.service.updateClientId(this.clientId);
       }
     };
+    //console.log(this.listOfMessages);
   }
 
   speak(text: string) {

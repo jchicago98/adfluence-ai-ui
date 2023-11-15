@@ -1,0 +1,39 @@
+.container {
+  max-width: 800px;
+  overflow-y: auto;
+  max-height: 600px;
+}
+
+h2 {
+  animation: textColor 10s ease infinite;
+}
+
+h4 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+@keyframes textColor {
+    0% {
+      color: #7e0fff;
+    }
+    50% {
+      color: #0fffc1;
+    }
+    100% {
+      color: #7e0fff;
+    }
+  }
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}

@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { LoginComponent } from './features/pages/login/login.component';
+import { PrivacyComponent } from './features/pages/privacy/privacy.component';
+import { TermsOfServiceComponent } from './features/pages/terms-of-service/terms-of-service.component';
+import { AboutUsComponent } from './features/pages/about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { LoginComponent } from './features/pages/login/login.component';
     LandingPageComponent,
     NavbarComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    PrivacyComponent,
+    TermsOfServiceComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,

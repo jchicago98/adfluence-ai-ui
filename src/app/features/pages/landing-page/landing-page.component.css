@@ -209,10 +209,6 @@
   text-shadow: none;
 }
 
-.button-group {
-  margin-top: 0.9vh;
-}
-
 .start-button {
   animation: textColor 10s ease infinite;
 }

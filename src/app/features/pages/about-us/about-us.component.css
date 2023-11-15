@@ -5,7 +5,7 @@
 }
 
 h2 {
-  color: #007bff;
+  animation: textColor 10s ease infinite;
 }
 
 h4 {
@@ -13,6 +13,18 @@ h4 {
   margin-bottom: 10px;
   color: #007bff;
 }
+
+@keyframes textColor {
+    0% {
+      color: #7e0fff;
+    }
+    50% {
+      color: #0fffc1;
+    }
+    100% {
+      color: #7e0fff;
+    }
+  }
 
 ::-webkit-scrollbar {
   width: 0;

@@ -5,6 +5,7 @@ import { LoginComponent } from './features/pages/login/login.component';
 import { AuthGuardService } from './core/services/auth-guard-service/auth-guard.service';
 import { PrivacyComponent } from './features/pages/privacy/privacy.component';
 import { TermsOfServiceComponent } from './features/pages/terms-of-service/terms-of-service.component';
+import { AboutUsComponent } from './features/pages/about-us/about-us.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'terms-of-service',
     component: TermsOfServiceComponent
+  },
+  {
+    path: 'about-us',
+    component: AboutUsComponent
   }
 ];
 

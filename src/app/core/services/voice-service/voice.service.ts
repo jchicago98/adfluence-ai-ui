@@ -68,7 +68,7 @@ export class VoiceService {
             let loggedIn : boolean = this.cookieService.check('adfluenceUserInfo');
             if(loggedIn){
               let cookieUserInfo: SocialUser = JSON.parse(this.cookieService.get('adfluenceUserInfo'));
-              const textObj = { userMessage: this.text, clientId: clientId };
+              const textObj = { userMessage: this.text, clientId: clientId, emailAddress: cookieUserInfo.email };
               this.socket.send(JSON.stringify(textObj));
             }
             else{
